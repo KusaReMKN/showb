@@ -4,38 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>みかんちゃんハウスの電力メータ</title>
-<style>
-body {
-	max-width: 800px;
-	margin-inline: auto;
-	padding: 1rem;
-}
-img {
-	max-width: 100%;
-}
-</style>
-<script>
-async function
-update()
-{
-	const p = document.getElementById('current');
-	const last = await fetch('./last.sh').then(r => r.text());
-	const [ t, w, i ] = last.split('\t').map(e => +e);
-	const d = new Date(t * 1000);
-	p.textContent = d.toLocaleDateString() + ' ' + d.toLocaleTimeString()
-			+ ' 時点で ' + w + ' W の電力を消費しています。';
-
-	const check = document.getElementById('autoupdate');
-	if (check.checked)
-		setTimeout(update, 3000);
-}
-
-window.addEventListener('DOMContentLoaded', _ => {
-	const check = document.getElementById('autoupdate');
-	check.addEventListener('change', _ => check.checked && update());
-	update();
-});
-</script>
+<link rel="stylesheet" href="./index.css">
+<script defer src="./index.js"></script>
 </head>
 <body>
 <header>
