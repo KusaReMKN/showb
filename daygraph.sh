@@ -15,5 +15,5 @@ set title "瞬時電力"
 set xlabel "時刻（UTC）"
 set ylabel "計測値 [W]"
 set nokey
-plot[][0:] "< sed 's/\t0\t/\tNA\t/' $datafile | awk '{if (\$1+86400>systime()) print;}'" using 1:2 with lines;
+plot[][0:] "< sed 's/\t0\t/\tNaN\t/' $datafile | awk '{if (\$1+86400>systime()) print;}'" using 1:2 with lines;
 EOF
