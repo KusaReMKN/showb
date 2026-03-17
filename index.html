@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>みかんちゃんハウスの電力メータ</title>
+<style>
+body {
+	max-width: 800px;
+	margin-inline: auto;
+	padding: 1rem;
+}
+img {
+	max-width: 100%;
+}
+</style>
+<script>
+async function
+update()
+{
+	const p = document.getElementById('current');
+	const last = await fetch('./last.sh').then(r => r.text());
+	const [ t, w, i ] = last.split('\t').map(e => +e);
+	const d = new Date(t * 1000);
+	p.textContent = d.toLocaleDateString() + ' ' + d.toLocaleTimeString()
+			+ ' 時点で ' + w + ' W の電力を消費しています。';
+
+	const check = document.getElementById('autoupdate');
+	if (check.checked)
+		setTimeout(update, 3000);
+}
+
+window.addEventListener('DOMContentLoaded', _ => {
+	const check = document.getElementById('autoupdate');
+	check.addEventListener('change', _ => check.checked && update());
+	update();
+});
+</script>
+</head>
+<body>
+<header>
+<h1>みかんちゃんハウスの電力メータ</h1>
+</header>
+<main>
+<section>
+<h2>最新の値</h2>
+<p id="current">
+最新の値を表示するには JavaScript が必要です。
+</p>
+<form>
+<input type="checkbox" id="autoupdate">
+<label for="autoupdate">自動で更新する</label>
+</form>
+</section>
+<h2>瞬時電力の推移</h2>
+<figure>
+<img src="./graph.sh" alt="瞬時電力"
+	width="1024" height="256" loading="lazy" decoding="async">
+</figure>
+</main>
+<footer>
+<p>
+<small>Copyright (c) 2026 KusaReMKN.
+All rights reserved.</small>
+</p>
+</footer>
+</body>
+</html>
