@@ -10,6 +10,7 @@ update()
 		${d.toLocaleDateString()} ${d.toLocaleTimeString()} 時点で
 		${w} W の電力を消費しています。`;
 	graph.src = `./graph.sh?${Math.random()}`;
+	daygraph.src = `./daygraph.sh?${Math.random()}`;
 	if (autoupdate.checked)
 		setTimeout(update, 15000);
 }
