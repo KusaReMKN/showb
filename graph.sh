@@ -10,7 +10,7 @@ gnuplot <<EOF
 set terminal svg size 1024,256 name "瞬時電力" rounded
 set xdata time
 set timefmt "%s"
-set format x "%H:%M"
+set format x "%F"
 set title "瞬時電力"
 set xlabel "時刻（UTC）"
 set ylabel "計測値 [W]"
