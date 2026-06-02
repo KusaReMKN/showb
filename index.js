@@ -12,6 +12,7 @@ update()
 	graph.src = `./graph.sh?${Math.random()}`;
 	daygraph.src = `./daygraph.sh?${Math.random()}`;
 	weekgraph.src = `./weekgraph.sh?${Math.random()}`;
+	monthgraph.src = `./monthgraph.sh?${Math.random()}`;
 	if (autoupdate.checked)
 		setTimeout(update, 15000);
 }
